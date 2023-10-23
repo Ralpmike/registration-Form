@@ -6,7 +6,12 @@
 // USERS
 
 
-const USERS = [];
+let USERS = [];
+
+//add to windows onload
+jsonString = localStorage.getItem('value');
+USERS = JSON.parse(jsonString||'[]')
+console.log({USERS})
 
 let FormEl = document.forms[0]
 
@@ -21,7 +26,6 @@ FormEl.addEventListener('submit', function(e){
     addUser(data)
     FormEl.reset()
 })
-
 
 function getAllUsers(){
     // USERS.forEach( (item) => console.log(item))
@@ -53,21 +57,15 @@ function editUser(user) { //user{username, phone,name,...}
     USERS[index] = { ...currentData, ...user }
 }
 
-
+function addToLocalStorage(){
+    localStorage.setItem("value", JSON.stringify(USERS))
+}
 
 function addUser(user) { //user{username, phone,name,...}
     let index = USERS.findIndex((item) => item.username == user.username);
-    if (index >= 0) { return }
+    if (index >= 0) { console.log(`This user ${user.username} exist`) }
     // perform validation
-    
-    ;validateUser(user)   
+     
     USERS.push(user); 
-}
-
-function validateUser(data) {
-    if(data.fullname, data.username, data.email, data.password){
-        return true;
-    }else{
-        return false;
-    }
+    addToLocalStorage()
 }
