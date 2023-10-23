@@ -68,8 +68,9 @@ function editUser(user) { //user{username, phone,name,...}
 
 
 function addUser(user) { //user{username, phone,name,...}
-    // let index = USERS.findIndex((item) => item.username == user.username);
-    // if (index >= 0) { return }
-    //perform validation
+    let index = USERS.findIndex((item) => item.username == user.username);
+    if (index >= 0) { return }
+    // perform validation
+    checker(user)
     USERS.push(user);    
 }
