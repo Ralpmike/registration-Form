@@ -7,13 +7,8 @@
 
 
 const USERS = [];
-let FormEl = document.forms[0]
-let butn = document.querySelector('button')
-let fullname = document.getElementById('fullname').value;
-let username = document.getElementById('username').value;
-let email = document.getElementById('email').value;
-let password = document.getElementById('password').value;
 
+let FormEl = document.forms[0]
 
 FormEl.addEventListener('submit', function(e){
     e.preventDefault();
@@ -22,25 +17,18 @@ FormEl.addEventListener('submit', function(e){
     let formData = new FormData(form);
     let data = Object.fromEntries(formData.entries())
 
+    
     addUser(data)
     FormEl.reset()
 })
 
-// function submitUser(){
 
-//     function Obj(fullname, username, email, password ) {
-//         this.fullname = fullname;
-//         this.username = username;
-//         this.email = email;
-//         this.password = password;
-//     }
-//     let userDetails = new Obj(fullname,username, email, password);
-//     console.log(userDetails)
-//     // USERS.push(userDetails)
-// }
+function getAllUsers(){
+    // USERS.forEach( (item) => console.log(item))
 
-    
-
+    return USERS
+}
+getAllUsers()
 
 
 function checker(item, username) {
@@ -71,6 +59,15 @@ function addUser(user) { //user{username, phone,name,...}
     let index = USERS.findIndex((item) => item.username == user.username);
     if (index >= 0) { return }
     // perform validation
-    checker(user)
-    USERS.push(user);    
+    
+    ;validateUser(user)   
+    USERS.push(user); 
+}
+
+function validateUser(data) {
+    if(data.fullname, data.username, data.email, data.password){
+        return true;
+    }else{
+        return false;
+    }
 }
